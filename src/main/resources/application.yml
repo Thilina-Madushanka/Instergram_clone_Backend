@@ -1,0 +1,15 @@
+server:
+  port: 8082   # Application server port
+
+spring:
+  application:
+    name: Instergram_Clone_Backend_2025  # Name of the application
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_name   # Database URL
+    username: root                        # Database username
+    password: 19970521                    # Database password
+    driver-class-name: com.mysql.cj.jdbc.Driver  # Database driver
+  jpa:
+    hibernate:
+      ddl-auto: update    # Hibernate settings, when using update it save data into db
+    show-sql: true        # Show SQL statements
