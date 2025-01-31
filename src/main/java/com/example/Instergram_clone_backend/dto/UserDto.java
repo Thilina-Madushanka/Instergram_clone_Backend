@@ -11,6 +11,10 @@ public class UserDto {
     private String userImage;
 
     //constructor
+
+    public UserDto(){
+    }
+
      public UserDto(Integer id, String username, String email, String name, String userImage) {
         super();
         this.id = id;
