@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -28,7 +30,38 @@ public class UserController {
     }
     @PutMapping("follow/{followUserId}")
     public ResponseEntity<MessageResponse> followUserHandler(@PathVariable Integer followUserId){
-//        MessageResponse res = userService.followUser(followUserId)
+//        MessageResponse res = userService.followUser(followUserId, followUserId)
         return null;
     }
+
+    @PutMapping("unfollow/{userid}")
+    public ResponseEntity<MessageResponse> unFollowUserHandler(@PathVariable Integer userId) {
+//        MessageResponse res = userService.followUser(followUserId , followUserId)
+        return null;
+    }
+
+    @PutMapping("req")
+    public ResponseEntity<MessageResponse> findUserProfileHandler(@RequestHeader("Authorization") String token) {
+//        MessageResponse res = userService.followUser(followUserId , followUserId)
+        return null;
+    }
+    @GetMapping("/m/{userIds}")
+    public ResponseEntity<List<User>> findUserByUserIdsHandler(@PathVariable List<Integer> userIds) throws UserException{
+        List<User> users = userService.findUserByIds(userIds);
+        return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+    }
+    //api/users/search?q="query"
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUserHandler(@RequestParam("q") String query) throws UserException{
+        List<User> users = userService.searchUser(query);
+        return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<User> updateUserHandler(@RequestHeader("Authorization") String token, @RequestBody User user){
+
+//        User updatedUser = userService.updateUserDetails(updated)
+            return null;
+    }
+
 }

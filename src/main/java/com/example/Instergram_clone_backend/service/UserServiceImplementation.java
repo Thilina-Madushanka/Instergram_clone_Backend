@@ -5,10 +5,11 @@ import com.example.Instergram_clone_backend.exceptions.UserException;
 import com.example.Instergram_clone_backend.modal.User;
 import com.example.Instergram_clone_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
