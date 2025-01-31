@@ -5,7 +5,7 @@ spring:
   application:
     name: Instergram_Clone_Backend_2025  # Name of the application
   datasource:
-    url: jdbc:mysql://localhost:3306/db_name   # Database URL
+    url: jdbc:mysql://localhost:3306/instergram   # Database URL
     username: root                        # Database username
     password: 19970521                    # Database password
     driver-class-name: com.mysql.cj.jdbc.Driver  # Database driver
