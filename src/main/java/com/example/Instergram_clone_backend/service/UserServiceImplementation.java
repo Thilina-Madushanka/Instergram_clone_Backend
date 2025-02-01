@@ -4,6 +4,8 @@ import com.example.Instergram_clone_backend.dto.UserDto;
 import com.example.Instergram_clone_backend.exceptions.UserException;
 import com.example.Instergram_clone_backend.modal.User;
 import com.example.Instergram_clone_backend.repository.UserRepository;
+import com.example.Instergram_clone_backend.security.JwtTokenClaims;
+import com.example.Instergram_clone_backend.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
     @Override
     public User registerUser(User user) throws UserException {
 
@@ -57,9 +61,17 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findUserProfile(String token) throws UserException {
+        //bearer fdbfjbdfjbdjfjkfbdkvdkjjdkdjkhhgfeprifg
 
+        token = token.substring(7);
+        JwtTokenClaims jwtTokenClaims = jwtTokenProvider.getClaimsFromToken(token);
+        String email = jwtTokenClaims.getUsername();
+        Optional<User> opt = userRepository.findByEmail(email);
+        if(opt.isPresent()){
+            return opt.get();
+        }
 
-        return null;
+        throw new UserException("Invalid Token...") ;
     }
 
     @Override
