@@ -18,9 +18,9 @@ public class GlobleExceptions {
     }
 
     @ExceptionHandler(PostException.class)
-    public ResponseEntity<ErrorDetails> PostExceptionHandler(PostException pe, WebRequest req){
+    public ResponseEntity<ErrorDetails> PostExceptionHandler(PostException ue, WebRequest req){
 
-        ErrorDetails err = new ErrorDetails(pe.getMessage(), req.getDescription(false), LocalDateTime.now());
+        ErrorDetails err = new ErrorDetails(ue.getMessage(), req.getDescription(false), LocalDateTime.now());
         return new ResponseEntity<ErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
 
@@ -31,7 +31,6 @@ public class GlobleExceptions {
         ErrorDetails err = new ErrorDetails(me.getBindingResult().getFieldError().getDefaultMessage(),"Validation Error", LocalDateTime.now());
         return new ResponseEntity<ErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> otherExceptionHandler(Exception ue, WebRequest req) {

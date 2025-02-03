@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +20,9 @@ public class Comment {
     })
     private UserDto user;
 
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
     private String content;
     @Embedded
     @ElementCollection
@@ -74,3 +78,4 @@ public class Comment {
         this.createdAt = createdAt;
     }
 }
+

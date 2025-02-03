@@ -1,8 +1,10 @@
 package com.example.Instergram_clone_backend.dto;
 
+import com.example.Instergram_clone_backend.modal.User;
+
 import java.util.Objects;
 
-public class UserDto {
+public class UserDto extends User { //use extend user to modify
 
    private Integer id;
     private String username;

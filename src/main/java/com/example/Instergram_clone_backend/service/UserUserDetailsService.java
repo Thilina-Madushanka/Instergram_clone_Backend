@@ -25,11 +25,8 @@ public class UserUserDetailsService implements UserDetailsService {
 
         if(opt.isPresent()){
             com.example.Instergram_clone_backend.modal.User user= opt.get();
+
             List<GrantedAuthority> authorities = new ArrayList<>();
-
-
-
-
             return new User(user.getEmail(),user.getPassword(),authorities);
         }
 

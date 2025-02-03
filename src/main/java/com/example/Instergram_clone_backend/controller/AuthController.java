@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-
 @RestController
 public class AuthController {
     @Autowired
@@ -31,12 +30,10 @@ public class AuthController {
 
     @GetMapping("/signin")
     public ResponseEntity<User> signinHandler(Authentication auth) throws BadCredentialsException{
-
-        Optional<User> opt = userRepo.findByEmail(auth.getName());//userRepo is not implemented create private variable
+        Optional<User> opt = userRepo.findByEmail(auth.getName());
         if(opt.isPresent()){
             return new ResponseEntity<User>(opt.get(),HttpStatus.ACCEPTED);
         }
-
         throw new BadCredentialsException("Invalid username or password");
     }
 

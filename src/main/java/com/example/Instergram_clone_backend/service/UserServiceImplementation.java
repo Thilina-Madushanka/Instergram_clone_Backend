@@ -4,8 +4,6 @@ import com.example.Instergram_clone_backend.dto.UserDto;
 import com.example.Instergram_clone_backend.exceptions.UserException;
 import com.example.Instergram_clone_backend.modal.User;
 import com.example.Instergram_clone_backend.repository.UserRepository;
-import com.example.Instergram_clone_backend.security.JwtTokenClaims;
-import com.example.Instergram_clone_backend.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,17 +16,21 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+
+//    @Autowired
+//    private JwtTokenProvider jwtTokenProvider;
+
     @Override
     public User registerUser(User user) throws UserException {
 
         Optional<User> isEmailExists = userRepository.findByEmail(user.getEmail());
+
         if(isEmailExists.isPresent()){
             throw new UserException("Email is Already Exists!");
         }
 
         Optional<User> isUsernameExists = userRepository.findByUsername(user.getUsername());
+
         if(isUsernameExists.isPresent()){
             throw new UserException("Username is Already Taken!");
         }
@@ -53,6 +55,7 @@ public class UserServiceImplementation implements UserService {
     public User findUserById(Integer userId) throws UserException {
 
         Optional<User> opt = userRepository.findById(userId);
+
         if(opt.isPresent()){
             return opt.get();
         }
@@ -61,17 +64,22 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findUserProfile(String token) throws UserException {
-        //bearer fdbfjbdfjbdjfjkfbdkvdkjjdkdjkhhgfeprifg
-
-        token = token.substring(7);
-        JwtTokenClaims jwtTokenClaims = jwtTokenProvider.getClaimsFromToken(token);
-        String email = jwtTokenClaims.getUsername();
-        Optional<User> opt = userRepository.findByEmail(email);
-        if(opt.isPresent()){
-            return opt.get();
-        }
-
-        throw new UserException("Invalid Token...") ;
+//            //bearer fdbfjbdfjbdjfjkfbdkvdkjjdkdjkhhgfeprifg
+//
+//            token = token.substring(7);
+//
+//            JwtTokenClaims jwtTokenClaims = jwtTokenProvider.getClaimsFromToken(token);
+//
+//            String email = jwtTokenClaims.getUsername();
+//
+//            Optional<User> opt = userRepository.findByEmail(email);
+//
+//            if(opt.isPresent()){
+//                return opt.get();
+//            }
+//
+//            throw new UserException("Invalid Token...") ;
+        return null;
     }
 
     @Override

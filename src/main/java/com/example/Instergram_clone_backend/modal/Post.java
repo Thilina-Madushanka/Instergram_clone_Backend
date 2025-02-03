@@ -2,8 +2,6 @@ package com.example.Instergram_clone_backend.modal;
 
 import com.example.Instergram_clone_backend.dto.UserDto;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Comments;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,29 +14,29 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String caption;
     private String image;
     private String location;
     private LocalDateTime createdAt;
 
-    @Embedded
+    @Embedded //implement relations
     @AttributeOverrides({
             @AttributeOverride(name="id", column = @Column(name="user_id")),
             @AttributeOverride(name="email", column= @Column(name="user_email"))
     })
     private UserDto user;
 
-    //one to many relation
     @OneToMany
-    private List<Comment> comments = new ArrayList<Comment>();
+    private List<Comment> comments = new ArrayList<>();
 
     @Embedded
     @ElementCollection
     @JoinTable(name="likedByUsers", joinColumns = @JoinColumn(name="user_id"))
     private Set<UserDto> likedByUsers = new HashSet<>();
 
-    //constructor
+    // constructor
+
+
     public Post(Integer id, String caption, String image, String location, LocalDateTime createdAt, UserDto user, List<Comment> comments, Set<UserDto> likedByUsers) {
         this.id = id;
         this.caption = caption;
@@ -50,7 +48,12 @@ public class Post {
         this.likedByUsers = likedByUsers;
     }
 
-    //setters and getters
+    public Post() {
+        super();
+    }
+
+    // setters and getters
+
     public Integer getId() {
         return id;
     }
