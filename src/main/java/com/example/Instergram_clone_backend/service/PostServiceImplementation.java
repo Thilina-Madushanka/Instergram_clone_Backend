@@ -10,6 +10,7 @@ import com.example.Instergram_clone_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,13 +29,14 @@ public class PostServiceImplementation implements PostService{
         User user = userService.findUserById(userId);
 
         UserDto userDto = new UserDto();
-        userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
+        userDto.setEmail(user.getEmail());
         userDto.setName(user.getName());
         userDto.setUserImage(user.getImage());
         userDto.setUsername(user.getUsername());
 
         post.setUser(userDto);
+//        post.setCreatedAt(LocalDateTime.now()); // Ensure createdAt is set
 
         Post createdPost = postRepository.save(post);
 
@@ -52,7 +54,7 @@ public class PostServiceImplementation implements PostService{
             postRepository.deleteById(post.getId());
             return "Post deleted Successfully!";
         }
-        throw new PostException("You cant delete Other User's post!");
+        throw new PostException("You can't delete Other User's post!");
 
     }
 

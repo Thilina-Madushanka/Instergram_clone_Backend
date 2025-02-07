@@ -18,7 +18,6 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 

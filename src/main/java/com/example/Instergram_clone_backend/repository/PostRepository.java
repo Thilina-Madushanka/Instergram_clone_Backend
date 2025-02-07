@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    @Query("SELECT p FROM Post p WHERE p.user.id=?1")
+    @Query("SELECT p From Post p Where p.user.id=?1")
     public List<Post> findByUserId(Integer userId);
 
-    @Query("SELECT p FROM Post p WHERE p.user.id IN :users ORDER BY p.createdAt DESC")
+    @Query("SELECT p From Post p Where p.user.id IN : users ORDER BY p.createdAt DESC")
     public List<Post> findAllPostByUserIds(@Param("users")List<Integer> userIds);
 
 }

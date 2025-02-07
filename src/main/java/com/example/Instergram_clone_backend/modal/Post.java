@@ -27,7 +27,7 @@ public class Post {
     private UserDto user;
 
     @OneToMany
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<Comment>();
 
     @Embedded
     @ElementCollection
@@ -36,8 +36,8 @@ public class Post {
 
     // constructor
 
-
     public Post(Integer id, String caption, String image, String location, LocalDateTime createdAt, UserDto user, List<Comment> comments, Set<UserDto> likedByUsers) {
+        super();
         this.id = id;
         this.caption = caption;
         this.image = image;
