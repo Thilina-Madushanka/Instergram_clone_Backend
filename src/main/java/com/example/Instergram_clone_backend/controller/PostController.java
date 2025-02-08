@@ -23,7 +23,7 @@ public class PostController {
     private UserService userService;
 
     @PostMapping("/create")
-    @ResponseBody //updated
+//    @ResponseBody
     public ResponseEntity<Post> createPostHandler (@RequestBody Post post, @RequestHeader("Authorization") String token) throws UserException {
         User user = userService.findUserProfile(token);
         Post createdPost = postService.createPost(post, user.getId());
