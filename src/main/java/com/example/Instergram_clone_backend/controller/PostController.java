@@ -29,6 +29,7 @@ public class PostController {
         Post createdPost = postService.createPost(post, user.getId());
 
         return new ResponseEntity<Post>(createdPost, HttpStatus.OK);
+//        return  ResponseEntity.ok().body(createdPost); // --comment in 2nd time
     }
 
     @GetMapping("/all/{id}")

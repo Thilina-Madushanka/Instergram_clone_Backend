@@ -12,6 +12,7 @@ public class ErrorDetails {
     }
 
     public ErrorDetails(String message, String details, LocalDateTime timestamp) {
+        super();
         this.message = message;
         this.details = details;
         this.timestamp = timestamp;
