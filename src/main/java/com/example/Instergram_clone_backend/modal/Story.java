@@ -24,7 +24,7 @@ public class Story {
     private LocalDateTime timestamp;
 
     public Story(){
-        super();
+
     }
 
     //constructor

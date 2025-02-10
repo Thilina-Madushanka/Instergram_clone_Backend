@@ -20,15 +20,17 @@ public class Comment {
     })
     private UserDto user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "post_id")
-//    private Post post;
+
     private String content;
     @Embedded
     @ElementCollection
     private Set<UserDto> likedByUsers = new HashSet<UserDto>();
 
     private LocalDateTime createdAt;
+
+    public Comment(){
+
+    }
 
     public Comment(Integer id, UserDto user, String content, Set<UserDto> likedByUsers, LocalDateTime createdAt) {
         this.id = id;

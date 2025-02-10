@@ -49,7 +49,7 @@ public class Post {
     }
 
     public Post() {
-        super();
+
     }
 
     // setters and getters
