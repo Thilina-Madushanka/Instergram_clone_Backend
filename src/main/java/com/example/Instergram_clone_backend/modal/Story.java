@@ -12,7 +12,7 @@ public class Story {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Embedded //implement relations
+    @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="id", column = @Column(name="user_id")),
             @AttributeOverride(name="email", column= @Column(name="user_email"))
@@ -29,7 +29,7 @@ public class Story {
 
     //constructor
     public Story(Integer id, UserDto user, String image, String caption, LocalDateTime timestamp) {
-        super();
+
         this.id = id;
         this.user = user;
         this.image = image;

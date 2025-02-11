@@ -23,13 +23,12 @@ public class PostController {
     private UserService userService;
 
     @PostMapping("/create")
-//    @ResponseBody
     public ResponseEntity<Post> createPostHandler (@RequestBody Post post, @RequestHeader("Authorization") String token) throws UserException {
         User user = userService.findUserProfile(token);
         Post createdPost = postService.createPost(post, user.getId());
 
         return new ResponseEntity<Post>(createdPost, HttpStatus.OK);
-//        return  ResponseEntity.ok().body(createdPost); // --comment in 2nd time
+
     }
 
     @GetMapping("/all/{id}")

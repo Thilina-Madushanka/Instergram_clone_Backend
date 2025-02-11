@@ -36,8 +36,6 @@ public class PostServiceImplementation implements PostService{
         userDto.setUsername(user.getUsername());
 
         post.setUser(userDto);
-//        post.setCreatedAt(LocalDateTime.now()); // Ensure createdAt is set
-
         Post createdPost = postRepository.save(post);
 
         return createdPost;

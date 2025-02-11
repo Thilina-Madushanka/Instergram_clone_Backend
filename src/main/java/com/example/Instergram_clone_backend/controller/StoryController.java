@@ -28,11 +28,11 @@ public class StoryController {
         Story createdStory = storyService.createStory(story, user.getId());
         return new ResponseEntity<Story>(createdStory, HttpStatus.OK);
     }
-
+    @GetMapping("/{userId}")
     public ResponseEntity<List<Story>> findAllStoryByUserHandler(@PathVariable Integer userId) throws UserException, StoryException {
 
         User user = userService.findUserById(userId);
-        List<Story> stories = storyService.findStoryByUserId(userId);
+        List<Story> stories = storyService.findStoryByUserId(user.getId());
 
         return new ResponseEntity<List<Story>>(stories, HttpStatus.OK);
 

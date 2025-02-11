@@ -16,7 +16,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.util.List;
-import static org.yaml.snakeyaml.tokens.Token.ID.Key;
 public class JwtTokenValidationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -26,12 +25,10 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
         if(jwt != null){
             try{
                 jwt = jwt.substring(7);
-//                jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
 
                 SecretKey key= Keys.hmacShaKeyFor(SecurityContext.JWT_KEY.getBytes());
 
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-//                Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 
                 String username = String.valueOf(claims.get("username"));
 

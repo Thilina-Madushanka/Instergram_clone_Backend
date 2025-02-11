@@ -65,7 +65,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findUserProfile(String token) throws UserException {
-//      bearer fdbfjbdfjbdjfjkfbdkvdkjjdkdjkhhgfeprifg
 
             token = token.substring(7);
 
@@ -108,11 +107,11 @@ public class UserServiceImplementation implements UserService {
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
-        following.setEmail(follower.getEmail());
-        following.setId(follower.getId());
-        following.setUserImage(follower.getUserImage());
-        following.setName(follower.getName());
-        following.setUsername(following.getUsername());
+        following.setEmail(followUser.getEmail());
+        following.setId(followUser.getId());
+        following.setUserImage(followUser.getImage());
+        following.setName(followUser.getName());
+        following.setUsername(followUser.getUsername());
 
         reqUser.getFollowing().add(following);
         followUser.getFollower().add(follower);
@@ -138,13 +137,13 @@ public class UserServiceImplementation implements UserService {
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
-        following.setEmail(follower.getEmail());
-        following.setId(follower.getId());
-        following.setUserImage(follower.getUserImage());
-        following.setName(follower.getName());
-        following.setUsername(following.getUsername());
+        following.setEmail(followUser.getEmail());
+        following.setId(followUser.getId());
+        following.setUserImage(followUser.getImage());
+        following.setName(followUser.getName());
+        following.setUsername(followUser.getUsername());
 
-        reqUser.getFollowing().remove(following);
+        reqUser.getFollowing().remove(following); // followUser
         followUser.getFollower().remove(follower);
 
         userRepository.save(followUser);
