@@ -22,27 +22,50 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
 
         String jwt= request.getHeader(SecurityContext.HEADER);
 
-        if(jwt != null){
+        if(jwt != null && jwt.startsWith("Bearer ")){
             try{
-                jwt = jwt.substring(7);
+                jwt = jwt.substring(7).trim();
+                System.out.println("Received JWT: " + jwt); // Debug log
 
-                SecretKey key= Keys.hmacShaKeyFor(SecurityContext.JWT_KEY.getBytes());
-
+//                SecretKey key= Keys.hmacShaKeyFor(SecurityContext.JWT_KEY.getBytes()); - original
+                SecretKey key = SecurityContext.getSigningKey();
+//                Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody(); - original
+//                Claims claims = Jwts.parserBuilder().setSigningKey(SecurityContext.getSigningKey()).build().parseClaimsJws(jwt.substring(7)).getBody();
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
 
-                String username = String.valueOf(claims.get("username"));
 
-                String authorities = (String)claims.get("authorities");
+//                String username = String.valueOf(claims.get("username"));
+//                String authorities = (String)claims.get("authorities");
+//                List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+//                Authentication auth = new UsernamePasswordAuthenticationToken(username, null ,auths);
+//                SecurityContextHolder.getContext().setAuthentication(auth);
+
+                String username = claims.get("username", String.class);
+                String authorities = claims.get("authorities", String.class);
 
                 List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+                Authentication auth = new UsernamePasswordAuthenticationToken(username, null, auths);
 
-                Authentication auth = new UsernamePasswordAuthenticationToken(username, null ,auths);
+                SecurityContextHolder.getContext().setAuthentication(auth); // ✅ Fix: Set auth context
 
-                SecurityContextHolder.getContext().setAuthentication(auth);
+//            }catch(Exception e){
+//                throw new BadCredentialsException("invalid token...");
+//            }
 
-            }catch(Exception e){
-                throw new BadCredentialsException("invalid token...");
+            } catch (io.jsonwebtoken.ExpiredJwtException e) {
+                System.err.println("JWT Error: Token has expired.");
+                throw new BadCredentialsException("Token has expired.");
+            } catch (io.jsonwebtoken.SignatureException e) {
+                System.err.println("JWT Error: Invalid token signature.");
+                throw new BadCredentialsException("Invalid token signature.");
+            } catch (io.jsonwebtoken.io.DecodingException e) {
+                System.err.println("JWT Error: Illegal Base64 character.");
+                throw new BadCredentialsException("Malformed JWT token.");
+            } catch (Exception e) {
+                System.err.println("JWT Error: " + e.getMessage());
+                throw new BadCredentialsException("Invalid token: " + e.getMessage());
             }
+
         }
         filterChain.doFilter(request, response);
     }
