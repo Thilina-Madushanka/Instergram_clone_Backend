@@ -4,6 +4,8 @@ import com.example.Instergram_clone_backend.dto.UserDto;
 import com.example.Instergram_clone_backend.exceptions.UserException;
 import com.example.Instergram_clone_backend.modal.User;
 import com.example.Instergram_clone_backend.repository.UserRepository;
+import com.example.Instergram_clone_backend.security.JwtTokenClaims;
+import com.example.Instergram_clone_backend.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,8 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-//    @Autowired
-//    private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     public User registerUser(User user) throws UserException {
@@ -64,22 +65,21 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findUserProfile(String token) throws UserException {
-//            //bearer fdbfjbdfjbdjfjkfbdkvdkjjdkdjkhhgfeprifg
-//
-//            token = token.substring(7);
-//
-//            JwtTokenClaims jwtTokenClaims = jwtTokenProvider.getClaimsFromToken(token);
-//
-//            String email = jwtTokenClaims.getUsername();
-//
-//            Optional<User> opt = userRepository.findByEmail(email);
-//
-//            if(opt.isPresent()){
-//                return opt.get();
-//            }
-//
-//            throw new UserException("Invalid Token...") ;
-        return null;
+
+            token = token.substring(7);
+
+            JwtTokenClaims jwtTokenClaims = jwtTokenProvider.getClaimsFromToken(token);
+
+            String email = jwtTokenClaims.getUsername();
+
+            Optional<User> opt = userRepository.findByEmail(email);
+
+            if(opt.isPresent()){
+                return opt.get();
+            }
+
+            throw new UserException("Invalid Token...") ;
+
     }
 
     @Override
@@ -103,15 +103,16 @@ public class UserServiceImplementation implements UserService {
         follower.setEmail(reqUser.getEmail());
         follower.setId(reqUser.getId());
         follower.setName(reqUser.getName());
-        follower.setUserImage(reqUser.getUsername());
+        follower.setUserImage(reqUser.getImage());
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
-        following.setEmail(follower.getEmail());
-        following.setId(follower.getId());
-        following.setUserImage(follower.getUserImage());
-        following.setName(follower.getName());
-        following.setUsername(following.getUsername());
+
+        following.setEmail(followUser.getEmail());
+        following.setId(followUser.getId());
+        following.setUserImage(followUser.getImage());
+        following.setName(followUser.getName());
+        following.setUsername(followUser.getUsername());
 
         reqUser.getFollowing().add(following);
         followUser.getFollower().add(follower);
@@ -133,15 +134,15 @@ public class UserServiceImplementation implements UserService {
         follower.setEmail(reqUser.getEmail());
         follower.setId(reqUser.getId());
         follower.setName(reqUser.getName());
-        follower.setUserImage(reqUser.getUsername());
+        follower.setUserImage(reqUser.getImage());
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
-        following.setEmail(follower.getEmail());
-        following.setId(follower.getId());
-        following.setUserImage(follower.getUserImage());
-        following.setName(follower.getName());
-        following.setUsername(following.getUsername());
+        following.setEmail(followUser.getEmail());
+        following.setId(followUser.getId());
+        following.setUserImage(followUser.getImage());
+        following.setName(followUser.getName());
+        following.setUsername(followUser.getUsername());
 
         reqUser.getFollowing().remove(following);
         followUser.getFollower().remove(follower);

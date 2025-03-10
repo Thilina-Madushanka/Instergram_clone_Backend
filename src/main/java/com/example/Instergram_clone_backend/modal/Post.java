@@ -19,7 +19,7 @@ public class Post {
     private String location;
     private LocalDateTime createdAt;
 
-    @Embedded //implement relations
+    @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="id", column = @Column(name="user_id")),
             @AttributeOverride(name="email", column= @Column(name="user_email"))
@@ -27,16 +27,14 @@ public class Post {
     private UserDto user;
 
     @OneToMany
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<Comment>();
 
     @Embedded
     @ElementCollection
-    @JoinTable(name="likedByUsers", joinColumns = @JoinColumn(name="user_id"))
+    @JoinTable(name="liked_by_users", joinColumns = @JoinColumn(name="post_id"))
     private Set<UserDto> likedByUsers = new HashSet<>();
 
     // constructor
-
-
     public Post(Integer id, String caption, String image, String location, LocalDateTime createdAt, UserDto user, List<Comment> comments, Set<UserDto> likedByUsers) {
         this.id = id;
         this.caption = caption;
@@ -49,11 +47,9 @@ public class Post {
     }
 
     public Post() {
-        super();
     }
 
     // setters and getters
-
     public Integer getId() {
         return id;
     }
