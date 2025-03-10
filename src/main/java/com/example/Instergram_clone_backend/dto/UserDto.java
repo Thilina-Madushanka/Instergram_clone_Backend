@@ -4,7 +4,7 @@ import com.example.Instergram_clone_backend.modal.User;
 
 import java.util.Objects;
 
-public class UserDto extends User { //use extend user to modify
+public class UserDto extends User {
 
    private Integer id;
     private String username;
