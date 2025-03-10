@@ -21,9 +21,9 @@ public interface PostService {
 
     public String unSavedPost(Integer postId , Integer userId) throws PostException, UserException;
 
-    public Post likePost(Integer PostId, Integer userId) throws PostException, UserException;
+    public Post likePost(Integer postId, Integer userId) throws PostException, UserException;
 
-    public Post unLikePost(Integer PostId , Integer userId) throws UserException, PostException;
+    public Post unLikePost(Integer postId , Integer userId) throws UserException, PostException;
 
 
 }

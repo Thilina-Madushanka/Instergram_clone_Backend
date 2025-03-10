@@ -14,7 +14,7 @@ public class JwtTokenProvider {
 
         SecretKey key= Keys.hmacShaKeyFor(SecurityContext.JWT_KEY.getBytes());
 
-        Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJwt(token).getBody();
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 
         String username = String.valueOf(claims.get("username"));
 

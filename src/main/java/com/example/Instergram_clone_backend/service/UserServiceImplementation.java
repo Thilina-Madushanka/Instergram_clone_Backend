@@ -103,10 +103,11 @@ public class UserServiceImplementation implements UserService {
         follower.setEmail(reqUser.getEmail());
         follower.setId(reqUser.getId());
         follower.setName(reqUser.getName());
-        follower.setUserImage(reqUser.getUsername());
+        follower.setUserImage(reqUser.getImage());
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
+
         following.setEmail(followUser.getEmail());
         following.setId(followUser.getId());
         following.setUserImage(followUser.getImage());
@@ -133,7 +134,7 @@ public class UserServiceImplementation implements UserService {
         follower.setEmail(reqUser.getEmail());
         follower.setId(reqUser.getId());
         follower.setName(reqUser.getName());
-        follower.setUserImage(reqUser.getUsername());
+        follower.setUserImage(reqUser.getImage());
         follower.setUsername(reqUser.getUsername());
 
         UserDto following =  new UserDto();
@@ -143,7 +144,7 @@ public class UserServiceImplementation implements UserService {
         following.setName(followUser.getName());
         following.setUsername(followUser.getUsername());
 
-        reqUser.getFollowing().remove(following); // followUser
+        reqUser.getFollowing().remove(following);
         followUser.getFollower().remove(follower);
 
         userRepository.save(followUser);

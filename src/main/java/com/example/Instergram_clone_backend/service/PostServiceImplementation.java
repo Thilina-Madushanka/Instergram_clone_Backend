@@ -119,9 +119,9 @@ public class PostServiceImplementation implements PostService{
     }
 
     @Override
-    public Post likePost(Integer PostId, Integer userId) throws PostException, UserException {
+    public Post likePost(Integer postId, Integer userId) throws PostException, UserException {
 
-        Post post = findPostById(PostId);
+        Post post = findPostById(postId);
         User user = userService.findUserById(userId);
 
         UserDto userDto = new UserDto();
@@ -138,8 +138,8 @@ public class PostServiceImplementation implements PostService{
     }
 
     @Override
-    public Post unLikePost(Integer PostId, Integer userId) throws UserException, PostException {
-        Post post = findPostById(PostId);
+    public Post unLikePost(Integer postId, Integer userId) throws UserException, PostException {
+        Post post = findPostById(postId);
         User user = userService.findUserById(userId);
         UserDto userDto = new UserDto();
 
