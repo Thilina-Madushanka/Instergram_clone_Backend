@@ -33,6 +33,7 @@ public class Comment {
     }
 
     public Comment(Integer id, UserDto user, String content, Set<UserDto> likedByUsers, LocalDateTime createdAt) {
+        super();
         this.id = id;
         this.user = user;
         this.content = content;

@@ -21,8 +21,8 @@ public class Post {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="id", column = @Column(name="user_id")),
-            @AttributeOverride(name="email", column= @Column(name="user_email"))
+            @AttributeOverride(name = "id", column = @Column(name = "user_id")),
+            @AttributeOverride(name = "email", column = @Column(name = "user_email")),
     })
     private UserDto user;
 
@@ -35,7 +35,12 @@ public class Post {
     private Set<UserDto> likedByUsers = new HashSet<>();
 
     // constructor
+
+    public Post() {
+    }
+
     public Post(Integer id, String caption, String image, String location, LocalDateTime createdAt, UserDto user, List<Comment> comments, Set<UserDto> likedByUsers) {
+        super();
         this.id = id;
         this.caption = caption;
         this.image = image;
@@ -44,9 +49,6 @@ public class Post {
         this.user = user;
         this.comments = comments;
         this.likedByUsers = likedByUsers;
-    }
-
-    public Post() {
     }
 
     // setters and getters

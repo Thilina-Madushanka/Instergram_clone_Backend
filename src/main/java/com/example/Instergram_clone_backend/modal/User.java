@@ -41,6 +41,7 @@ public class User{
 
     // Constructor
     public User(Integer id, String username, String name, String email, String mobile, String website, String bio, String gender, String image, String password, Set<UserDto> follower, Set<UserDto> following, List<Story> stories, List<Post> savePost) {
+        super();
         this.id = id;
         this.username = username;
         this.name = name;
