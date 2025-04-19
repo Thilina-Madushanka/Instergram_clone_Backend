@@ -44,6 +44,7 @@ public class PostController {
 
         return new ResponseEntity<List<Post>>(posts,HttpStatus.OK);
     }
+
     @GetMapping("/{postId}")
     public ResponseEntity<Post> findPostByIdHandler(@PathVariable Integer postId) throws PostException {
 

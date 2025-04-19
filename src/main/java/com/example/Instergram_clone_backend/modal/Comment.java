@@ -16,10 +16,9 @@ public class Comment {
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="id", column = @Column(name="user_id")),
-            @AttributeOverride(name="email", column= @Column(name="user_email"))
+            @AttributeOverride(name="email", column= @Column(name="user_email")),
     })
     private UserDto user;
-
 
     private String content;
     @Embedded

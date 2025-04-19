@@ -64,6 +64,7 @@ public class CommentServiceImplementation implements CommentService{
 
     @Override
     public Comment likeComment(Integer commentId, Integer userId) throws CommentException, UserException {
+
         User user = userService.findUserById(userId);
         Comment comment = findCommentById(commentId);
 
@@ -82,7 +83,7 @@ public class CommentServiceImplementation implements CommentService{
     @Override
     public Comment unlikeComment(Integer commentId, Integer userId) throws CommentException, UserException {
         User user = userService.findUserById(userId);
-        Comment comment = findCommentById(userId);
+        Comment comment = findCommentById(commentId);
 
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());

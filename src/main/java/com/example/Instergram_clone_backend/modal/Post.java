@@ -31,7 +31,7 @@ public class Post {
 
     @Embedded
     @ElementCollection
-    @JoinTable(name="liked_by_users", joinColumns = @JoinColumn(name="post_id"))
+    @JoinTable(name="likedByUsers", joinColumns = @JoinColumn(name="user_id"))
     private Set<UserDto> likedByUsers = new HashSet<>();
 
     // constructor
