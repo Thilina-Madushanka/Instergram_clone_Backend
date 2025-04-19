@@ -46,7 +46,7 @@ public class UserController {
         return new ResponseEntity<MessageResponse>(res,HttpStatus.OK);
     }
 
-    @PutMapping("/req")
+    @GetMapping("/req")
     public ResponseEntity<User> findUserProfileHandler(@RequestHeader("Authorization") String token) throws UserException {
 
         User user = userService.findUserProfile(token);

@@ -4,21 +4,19 @@ import com.example.Instergram_clone_backend.modal.User;
 
 import java.util.Objects;
 
-public class UserDto extends User {
+public class UserDto {
 
-   private Integer id;
+    private Integer id;
     private String username;
     private String email;
     private String name;
     private String userImage;
 
-    //constructor
 
     public UserDto(){
     }
 
      public UserDto(Integer id, String username, String email, String name, String userImage) {
-        super();
         this.id = id;
         this.username = username;
         this.email = email;
@@ -74,7 +72,10 @@ public class UserDto extends User {
         if (obj == null) return false;
         if(getClass() != obj.getClass()) return false;
         UserDto userDto = (UserDto) obj;
-        return Objects.equals(id, userDto.id) && Objects.equals(username, userDto.username) && Objects.equals(email, userDto.email) && Objects.equals(name, userDto.name) && Objects.equals(userImage, userDto.userImage);
+        return Objects.equals(id, userDto.id) &&
+                Objects.equals(username, userDto.username) &&
+                Objects.equals(email, userDto.email) &&
+                Objects.equals(name, userDto.name) &&
+                Objects.equals(userImage, userDto.userImage);
     }
-
 }
