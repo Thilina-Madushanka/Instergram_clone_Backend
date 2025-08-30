@@ -62,10 +62,6 @@ public class PostServiceImplementation implements PostService{
 
         List<Post> posts = postRepository.findByUserId(userId);
 
-        if(posts.size()==0){
-            throw new UserException("this user does not have any post");
-        }
-
         return posts;
     }
 
